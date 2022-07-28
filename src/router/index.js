@@ -5,8 +5,9 @@ import EventDetails from '../views/EventDetailView.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: EventListView
+    name: 'EventList',
+    component: EventListView,
+    props: (route) => ({ page: parseInt(route.query.page) || 1 })
   },
   {
     path: '/about',

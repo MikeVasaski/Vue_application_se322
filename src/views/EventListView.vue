@@ -6,6 +6,19 @@
       :key="event.id"
       :event="event"
     ></EventCard>
+    <router-link
+      :to="{ name: 'EventList', query: { page: page - 1 } }"
+      rel="prev"
+      v-if="page != 1"
+    >
+      Prev Page
+    </router-link>
+    <router-link
+      :to="{ name: 'EventList', query: { page: page + 1 } }"
+      rel="next"
+    >
+      Next Page
+    </router-link>
   </div>
 </template>
 
@@ -13,8 +26,15 @@
 // @ is an alias to /src
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
+import { watchEffect } from '@vue/runtime-core'
 export default {
   name: 'EventListView',
+  props: {
+    page: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     EventCard
   },
@@ -24,13 +44,15 @@ export default {
     }
   },
   created() {
-    EventService.getEvents()
-      .then((response) => {
-        this.events = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    watchEffect(() => {
+      EventService.getEvents(2, this.page)
+        .then((response) => {
+          this.events = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    })
   }
 }
 </script>

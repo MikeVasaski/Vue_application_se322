@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
 import EventDetails from '../views/EventDetailView.vue'
+import setAmount from '../views/setAmount.vue'
 const routes = [
   {
     path: '/',
@@ -19,6 +20,12 @@ const routes = [
     name: 'EventDetails',
     component: EventDetails,
     props: true
+  },
+  {
+    path: '/setamount',
+    name: 'setAmount',
+    component: setAmount,
+    props: (route) => ({ amount: parseInt(route.query.amount) })
   }
 ]
 

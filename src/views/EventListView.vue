@@ -6,19 +6,24 @@
       :key="event.id"
       :event="event"
     ></EventCard>
-    <router-link
-      :to="{ name: 'EventList', query: { page: page - 1 } }"
-      rel="prev"
-      v-if="page != 1"
-    >
-      Prev Page
-    </router-link>
-    <router-link
-      :to="{ name: 'EventList', query: { page: page + 1 } }"
-      rel="next"
-    >
-      Next Page
-    </router-link>
+    <div class="pagination">
+      <router-link
+        id="page-prev"
+        :to="{ name: 'EventList', query: { page: page - 1 } }"
+        rel="prev"
+        v-if="page != 1"
+      >
+        Prev Page
+      </router-link>
+      <router-link
+        id="page-next"
+        :to="{ name: 'EventList', query: { page: page + 1 } }"
+        rel="next"
+        v-if="hasNextPage"
+      >
+        Next Page
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -33,6 +38,11 @@ export default {
     page: {
       type: Number,
       required: true
+    },
+    element: {
+      // To define a number of card
+      type: Number,
+      required: true
     }
   },
   components: {
@@ -40,19 +50,31 @@ export default {
   },
   data() {
     return {
-      events: null
+      events: null,
+      totalEvents: 0 // this is to store the number of total Events
     }
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(2, this.page)
+      EventService.getEvents(this.element, this.page)
         .then((response) => {
           this.events = response.data
+          this.totalEvents = response.headers['x-total-count'] // store a total
         })
         .catch((error) => {
           console.log(error)
         })
     })
+  },
+  computed: {
+    hasNextPage() {
+      // First, calculate total pages
+      let totalPages = Math.ceil(this.totalEvents / this.element) // element is events per page
+      return this.page < totalPages // check the current page less than or not
+    },
+    receiveAmount(amount) {
+      this.element = amount
+    }
   }
 }
 </script>
@@ -61,5 +83,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.pagination {
+  display: flex;
+  width: 290px;
+}
+.pagination a {
+  flex: 1;
+  text-decoration: none;
+  color: #2c3e50;
+}
+#page-prev {
+  text-align: left;
+}
+#page-next {
+  text-align: right;
 }
 </style>

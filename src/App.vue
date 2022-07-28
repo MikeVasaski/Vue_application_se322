@@ -2,6 +2,7 @@
   <nav>
     <router-link :to="{ name: 'EventList' }">Home</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link>
+    <router-link :to="{ name: 'setAmount' }">Set the amount</router-link>
   </nav>
   <router-view />
 </template>

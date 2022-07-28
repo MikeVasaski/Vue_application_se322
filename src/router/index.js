@@ -5,7 +5,7 @@ import EventDetails from '../views/EventDetailView.vue'
 const routes = [
   {
     path: '/',
-    name: 'EventList',
+    name: 'home',
     component: EventListView
   },
   {

@@ -71,9 +71,6 @@ export default {
       // First, calculate total pages
       let totalPages = Math.ceil(this.totalEvents / this.element) // element is events per page
       return this.page < totalPages // check the current page less than or not
-    },
-    receiveAmount(amount) {
-      this.element = amount
     }
   }
 }

@@ -2,13 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
 import EventDetails from '../views/EventDetailView.vue'
-import setAmount from '../views/setAmount.vue'
 const routes = [
   {
     path: '/',
     name: 'EventList',
     component: EventListView,
-    props: (route) => ({ page: parseInt(route.query.page) || 1 })
+    props: (route) => ({
+      page: parseInt(route.query.page) || 1,
+      element: parseInt(route.query.element) || 3
+    })
   },
   {
     path: '/about',
@@ -20,12 +22,6 @@ const routes = [
     name: 'EventDetails',
     component: EventDetails,
     props: true
-  },
-  {
-    path: '/setamount',
-    name: 'setAmount',
-    component: setAmount,
-    props: (route) => ({ amount: parseInt(route.query.amount) })
   }
 ]
 

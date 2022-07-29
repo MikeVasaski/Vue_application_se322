@@ -24,6 +24,9 @@
         Next Page
       </router-link>
     </div>
+    <router-link :to="{ name: 'EventList', query: { element: element + 1 } }">
+      Set amount
+    </router-link>
   </div>
 </template>
 
@@ -33,7 +36,7 @@ import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
 import { watchEffect } from '@vue/runtime-core'
 export default {
-  name: 'EventListView',
+  name: 'EventList',
   props: {
     page: {
       type: Number,

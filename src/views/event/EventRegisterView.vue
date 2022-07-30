@@ -1,5 +1,5 @@
 <template>
-  <p>Edit the event here</p>
+  <p>Register form here</p>
 </template>
 <script>
 export default {

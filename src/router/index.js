@@ -46,7 +46,7 @@ const routes = [
         name: 'EventEdit',
         props: true,
         component: EventEdit
-      },
+      }
     ]
   },
   {

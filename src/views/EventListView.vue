@@ -62,6 +62,7 @@ export default {
       EventService.getEvents(this.element, this.page)
         .then((response) => {
           this.events = response.data
+          console.log(response)
           this.totalEvents = response.headers['x-total-count'] // store a total
         })
         .catch((error) => {

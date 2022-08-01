@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3004',
+  baseURL:
+    'https://my-json-server.typicode.com/se331-2022/passengerdb/passenger?_page=1&_limit=5',
   withCredentials: false,
   headers: {
     Accept: 'application/json',

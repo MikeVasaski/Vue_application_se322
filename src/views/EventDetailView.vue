@@ -1,8 +1,7 @@
 <template>
   <div v-if="event">
-    <h1>{{ event.title }}</h1>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event.description }}</p>
+    <h1>{{ event.traveldate }}</h1>
+    <p>{{ event.airlineID }} on {{ event.Destination }}, {{ event.Source }}</p>
   </div>
 </template>
 

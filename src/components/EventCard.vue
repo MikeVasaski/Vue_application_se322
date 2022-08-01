@@ -4,10 +4,7 @@
     :to="{ name: 'EventDetails', params: { id: event.id } }"
   >
     <div class="event-card">
-      <span>Airline ID: {{event.airlineID}}</span>
-      <p>Destination: {{event.Destination}}, {{event.Source}}</p>
-      <span>Name: {{ event.first_name }} {{ event.last_name }}</span>
-      <p>{{ event.email }}</p>
+      <h2>Name: {{ event.first_name }} {{ event.last_name }}</h2>
     </div>
   </router-link>
 </template>

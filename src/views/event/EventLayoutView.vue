@@ -27,7 +27,7 @@ export default {
     }
   },
   created() {
-    EventService.getEvents(this.id)
+    EventService.getEvent(this.id)
       .then((response) => {
         this.event = response.data
       })

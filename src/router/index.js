@@ -7,6 +7,7 @@ import EventEdit from '../views/event/EventEditView.vue'
 import EventLayout from '../views/event/EventLayoutView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import NetworkError from '../views/NetworkErrorView.vue'
+import NProgress from 'nprogress'
 import EventService from '@/services/EventService.js'
 import GStore from '@/store'
 
@@ -90,4 +91,10 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach(() => {
+  NProgress.start()
+})
+router.afterEach(() => {
+  NProgress.done()
+})
 export default router

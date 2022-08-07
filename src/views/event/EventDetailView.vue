@@ -6,9 +6,24 @@
   <p>first name: {{ event.first_name }}</p>
   <p>last_name: {{ event.last_name }}</p>
   <p>E-mail: {{ event.email }}</p>
+  <button @click="edit">Edit here</button>
 </template>
 <script>
 export default {
-  props: ['event']
+  props: ['event'],
+  inject: ['GStore'],
+  methods: {
+    register() {
+      this.GStore.flashMessage = 'Data is updated'
+      setTimeout(() => {
+        this.GStore.flashMessage = ''
+      }, 5000)
+
+      this.$router.push({
+        name: 'EventDetails',
+        params: { id: this.event.id }
+      })
+    }
+  }
 }
 </script>

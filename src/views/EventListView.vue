@@ -34,7 +34,7 @@
 // @ is an alias to /src
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
-import { watchEffect } from '@vue/runtime-core'
+
 export default {
   name: 'EventList',
   props: {
@@ -57,23 +57,23 @@ export default {
       totalEvents: 0 // this is to store the number of total Events
     }
   },
-  created() {
-    watchEffect(() => {
-      EventService.getEvents(this.element, this.page)
-        .then((response) => {
-          this.events = response.data
-          console.log(response)
-          this.totalEvents = response.headers['x-total-count'] // store a total
+  // eslint-disable-next-line no-unused-vars
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+      .then((response) => {
+        next((comp) => {
+          comp.events = response.data
+          comp.totalEvents = response.headers['x-total-count']
         })
-        .catch((error) => {
-          console.log(error)
-        })
-    })
+      })
+      .catch(() => {
+        next({ name: 'NetworkError' })
+      })
   },
   computed: {
     hasNextPage() {
       // First, calculate total pages
-      let totalPages = Math.ceil(this.totalEvents / this.element) // element is events per page
+      let totalPages = Math.ceil(this.totalEvents / 2) // element is events per page
       return this.page < totalPages // check the current page less than or not
     }
   }

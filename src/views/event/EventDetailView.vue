@@ -13,7 +13,7 @@ export default {
   props: ['event'],
   inject: ['GStore'],
   methods: {
-    register() {
+    edit() {
       this.GStore.flashMessage = 'Data is updated'
       setTimeout(() => {
         this.GStore.flashMessage = ''

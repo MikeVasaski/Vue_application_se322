@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '../views/EventListView.vue'
+import EventListView from '@/views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
-import EventDetails from '../views/event/EventDetailView.vue'
-import EventRegister from '../views/event/EventRegisterView.vue'
-import EventEdit from '../views/event/EventEditView.vue'
-import EventLayout from '../views/event/EventLayoutView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
-import NetworkError from '../views/NetworkErrorView.vue'
+import EventDetails from '@/views/event/EventDetailView.vue'
+import EventRegister from '@/views/event/EventRegisterView.vue'
+import EventEdit from '@/views/event/EventEditView.vue'
+import EventLayout from '@/views/event/EventLayoutView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import NetworkError from '@/views/NetworkErrorView.vue'
 import NProgress from 'nprogress'
 import EventService from '@/services/EventService.js'
 import GStore from '@/store'
@@ -88,7 +88,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  }
 })
 
 router.beforeEach(() => {
